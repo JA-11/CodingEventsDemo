@@ -26,34 +26,29 @@ namespace CodingEventsDemo.Controllers
         }
 
         [HttpGet]
-        [Route("EventCategory/Create")]
         public IActionResult Create()
         {
             AddEventCategoryViewModel addEventCategoryViewModel = new AddEventCategoryViewModel();
-
             return View(addEventCategoryViewModel);
         }
 
         [HttpPost]
-        [Route("EventCategory/ProcessCreateEventCategoryForm")]
         public IActionResult ProcessCreateEventCategoryForm(AddEventCategoryViewModel addEventCategoryViewModel)
         {
             if (ModelState.IsValid)
             {
-                EventCategory newEventCategory = new EventCategory
+                EventCategory newCategory = new EventCategory
                 {
                     Name = addEventCategoryViewModel.Name
                 };
 
-                context.Categories.Add(newEventCategory);
-
+                context.Categories.Add(newCategory);
                 context.SaveChanges();
 
                 return Redirect("/EventCategory");
             }
 
             return View("Create", addEventCategoryViewModel);
-
         }
 
     }
